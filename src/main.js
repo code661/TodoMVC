@@ -92,10 +92,8 @@ let app = new Vue({
     updateTodo: function(){
       var dataString = JSON.stringify(this.todoList)
       var todos = AV.Object.createWithoutData('TodoFolder',this.todoId)
-      console.log(dataString)
       todos.set('todoList',dataString)
       todos.save().then((todo)=>{
-        console.log('更新了',todo.id)
       })
     },
     saveTodo(){
@@ -109,7 +107,6 @@ let app = new Vue({
       todoFolder.setACL(acl)
       todoFolder.save().then((todo)=> {
         this.todoId = todo.id
-        console.log("保存了",todo.id,this.todoList)
       })
     },
     saveOrUpdateTodo(){
@@ -124,15 +121,12 @@ let app = new Vue({
       var query = new AV.Query('TodoFolder')
       query.find()
         .then((tododata)=>{
-          console.log(tododata)
           if (tododata){
             var todos = tododata[0]
-            console.log(this)
             this.todoId = todos.id
-            console.log("看我这个数组的id",this)
             this.todoList = JSON.parse(todos.attributes.todoList)
           } else {
-            console.log('kong')
+            console.log('为空')
           }
         }, function(err){
           console.log(err)
