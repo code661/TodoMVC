@@ -59,7 +59,7 @@ let app = new Vue({
       window.localStorage.setItem('todo',dataString)
     }
     let oldDataString = window.localStorage.getItem('todo')
-    this.todoList = JSON.parse(oldDataString)
+    this.todoList = JSON.parse(oldDataString) || []
   },
   methods: {
     removeTodo(index) {
@@ -95,7 +95,6 @@ let app = new Vue({
       console.log(dataString)
       todos.set('todoList',dataString)
       todos.save().then((todo)=>{
-        console.log('更新了',todo.id)
       })
     },
     saveTodo(){
@@ -129,10 +128,9 @@ let app = new Vue({
             var todos = tododata[0]
             console.log(this)
             this.todoId = todos.id
-            console.log("看我这个数组的id",this)
             this.todoList = JSON.parse(todos.attributes.todoList)
           } else {
-            console.log('kong')
+            console.log('错误')
           }
         }, function(err){
           console.log(err)
