@@ -59,7 +59,7 @@ let app = new Vue({
       window.localStorage.setItem('todo',dataString)
     }
     let oldDataString = window.localStorage.getItem('todo')
-    this.todoList = JSON.parse(oldDataString)
+    this.todoList = JSON.parse(oldDataString) || []
   },
   methods: {
     removeTodo(index) {
